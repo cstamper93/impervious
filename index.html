@@ -6,14 +6,54 @@
     <title>Impervious Surface Generator</title>
     <!-- <link rel="icon" href="../images/favicon.png" type="image/png"> -->
     <style></style>
-    <script></script>
+    <script>
+    function calculate() {
+      const lot = parseFloat(document.getElementById("lot-area").value);
+      const house = parseFloat(document.getElementById("house-area").value);
+      const drive = parseFloat(document.getElementById("drive-area").value);
+
+      if (!lot || lot <=0) {
+        alert("Please enter a valid lot area");
+        return;
+      } 
+
+      const totalImpervious = house + drive;
+
+      const housePercent = (house / lot)*100;
+      const drivePercent = (drive / lot)*100;
+      const totalPercent = (totalImpervious / lot)*100;
+
+      document.getElementById("total-impervious").textContent = totalImpervious.toFixed(2) + " sq.ft.";
+      document.getElementById("house-percent").textContent = housePercent.toFixed(2) + "%";
+      document.getElementById("drive-percent").textContent = drivePercent.toFixed(2) + "%";
+      document.getElementById("total-percent").textContent = totalPercent.toFixed(2) + "%";
+    }
+    </script>
   </head>
   <body>
     <div>
-      <h1>Impervious Surface</h1>
-      <h3>Lot Area: </h3>
-      <h3>House Area: </h3>
-      <h3>Drive Area: </h3>
+      <h1>Impervious Surface Calculator</h1>
+      <label>Lot Area: </label>
+      <input type="number" id="lot-area" step="0.01"/><p>sq.ft.</p>
+      <label>House Area: </label>
+      <input type="number" id="house-area" step="0.01"/><p>sq.ft.</p>
+      <label>Drive Area: </label>
+      <input type="number" id="drive-area" step="0.01"/><p>sq.ft.</p>
+      <button onclick="calculate()">Calculate</button>
+    </div>
+    <div class="results">
+      <p>
+        <strong>Total Impervious: </strong><span id="total-impervious">-</span>
+      </p>
+      <p>
+        <strong>% of House on Lot: </strong><span id="house-percent">-</span>
+      </p>
+      <p>
+        <strong>% of Drive on Lot: </strong><span id="drive-percent">-</span>
+      </p>
+      <p>
+        <strong>% of Total Lot: </strong><span id="total-percent">-</span>
+      </p>
     </div>
   </body>
 </html>
